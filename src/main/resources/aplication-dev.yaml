@@ -1,0 +1,6 @@
+spring:
+  data:
+    mongodb:
+      host: mongodb://admin:arduino_maker_bff
+      port: 27017
+      database: dev

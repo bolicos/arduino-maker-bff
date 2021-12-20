@@ -26,5 +26,9 @@ hs_err_pid*
 !gradle/gradle-wrapper.properties
 .gradle/
 
+# IDEs
 build/
 bin/
+.idea
+.vscode
+local.properties

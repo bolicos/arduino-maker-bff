@@ -8,7 +8,13 @@ plugins {
 
 group = 'com.github.analuciabolico'
 version = '0.0.1'
-sourceCompatibility = '17'
+
+
+
+compileJava {
+	sourceCompatibility "$JavaVersion.VERSION_17"
+	targetCompatibility "$JavaVersion.VERSION_17"
+}
 
 configurations {
 	compileOnly {
@@ -22,7 +28,7 @@ repositories {
 
 ext {
 	set('snippetsDir', file("build/generated-snippets"))
-	set('springCloudVersion', "2021.0.0")
+	set('springBootMainClass', "com.github.analuciabolico.arduinomakerbff.Application")
 }
 
 dependencies {
@@ -36,22 +42,17 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.liquibase:liquibase-core'
-	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'io.r2dbc:r2dbc-h2'
 	runtimeOnly 'io.r2dbc:r2dbc-postgresql'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-}
-
-dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-	}
 }
 
 test {
@@ -62,4 +63,11 @@ test {
 asciidoctor {
 	inputs.dir snippetsDir
 	dependsOn test
+}
+
+task bootRunDev(type: JavaExec) {
+	description = "Run the project on DEV profile"
+	classpath = sourceSets.main.runtimeClasspath
+	main(springBootMainClass)
+	args = ["--spring.profiles.active=dev"]
 }

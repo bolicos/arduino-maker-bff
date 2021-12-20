@@ -1,0 +1,44 @@
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 1024
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, infos
+
+logging:
+  level:
+    root: INFO
+
+#documentation:
+#  swagger:
+#    enabled: true
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: arduino-maker-bff
+  jackson:
+    time-zone: UTC
+    date-format:  yyyy-MM-dd HH:mm:ss
+  h2:
+    console:
+      enabled: false
+
+  # jpa:
+  #   show-sql: true
+  #   hibernate:
+  #     ddl-auto: validate
+  #   properties:
+  #     hibernate:
+  #       show_sql: true
+  #       use_sql_comments: false
+  #       format_sql: true
+  # datasource:
+  #   driver-class-name: org.postgresql.Driver
