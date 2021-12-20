@@ -68,12 +68,8 @@ asciidoctor {
 	dependsOn test
 }
 
-jar {
-	manifest {
-		attributes(
-				'Main-Class': springBootMainClass
-		)
-	}
+tasks.named('jar') {
+	enabled = false
 }
 
 task bootRunDev(type: JavaExec) {
