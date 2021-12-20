@@ -20,7 +20,6 @@ public class BlockController {
 
 
     @GetMapping(
-            consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public @ResponseBody Flux<BlockDto> findAll() {
