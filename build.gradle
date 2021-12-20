@@ -8,15 +8,16 @@ plugins {
 
 group = 'com.github.analuciabolico'
 version = '0.0.1'
-
-
-
 compileJava {
 	sourceCompatibility "$JavaVersion.VERSION_17"
 	targetCompatibility "$JavaVersion.VERSION_17"
 }
 
 configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
@@ -48,11 +49,13 @@ dependencies {
 	runtimeOnly 'io.r2dbc:r2dbc-h2'
 	runtimeOnly 'io.r2dbc:r2dbc-postgresql'
 	runtimeOnly 'org.postgresql:postgresql'
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
 }
 
 test {
@@ -63,6 +66,14 @@ test {
 asciidoctor {
 	inputs.dir snippetsDir
 	dependsOn test
+}
+
+jar {
+	manifest {
+		attributes(
+				'Main-Class': springBootMainClass
+		)
+	}
 }
 
 task bootRunDev(type: JavaExec) {
