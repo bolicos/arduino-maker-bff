@@ -1,0 +1,4 @@
+spring:
+  data:
+    mongodb:
+      uri: "mongodb://admin:arduino_maker_bff@15.15.15.0:27017/dev"
