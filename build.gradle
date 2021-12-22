@@ -72,9 +72,9 @@ tasks.named('jar') {
 	enabled = false
 }
 
-task bootRunDev(type: JavaExec) {
+task bootRunLocal(type: JavaExec) {
 	description = "Run the project on DEV profile"
 	classpath = sourceSets.main.runtimeClasspath
 	main(springBootMainClass)
-	args = ["--spring.profiles.active=dev"]
+	args = ["--spring.profiles.active=local"]
 }
