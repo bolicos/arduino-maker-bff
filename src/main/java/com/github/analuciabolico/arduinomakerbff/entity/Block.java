@@ -14,10 +14,13 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "blocks")
+@Document(collection = "classes")
 public class Block {
     @Id
     private String id;
     private String name;
-    private String description;
+    private String code;
+    private String include;
+    private String type;
+    private Integer quantity;
 }
