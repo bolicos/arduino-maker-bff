@@ -8,9 +8,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.Collections;
-import java.util.List;
-
 @Configuration
 @AllArgsConstructor
 public class InternalCorsConfiguration {
