@@ -53,6 +53,7 @@ class WebFluxConfiguration : WebFluxConfigurer {
     override fun addCorsMappings(registry: CorsRegistry) {
         registry
             .addMapping("/**")
-            .allowedMethods("*");
+            .allowedMethods("*")
+            .allowedOriginPatterns("https://*.herokuapp.com", "http://localhost:3000")
     }
 }
