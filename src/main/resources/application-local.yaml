@@ -1,4 +1,0 @@
-spring:
-  data:
-    mongodb:
-      uri: "mongodb://${MONGODB_LOCAL_USER}:${MONGODB_LOCAL_PASSWORD}@${MONGODB_LOCAL_IP}:27017/dev?authSource=admin"
