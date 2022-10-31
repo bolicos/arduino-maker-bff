@@ -54,6 +54,6 @@ class WebFluxConfiguration : WebFluxConfigurer {
         registry
             .addMapping("/**")
             .allowedMethods("*")
-            .allowedOriginPatterns("https://*.herokuapp.com", "http://localhost:3000")
+            .allowedOriginPatterns("https://*.herokuapp.com","https://*.netlify.app", "http://localhost:3000")
     }
 }
