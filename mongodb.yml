@@ -5,7 +5,7 @@ networks:
   mongodb_network:
     driver: bridge
     ipam:
-      driver: bridge
+      driver: default
       config:
         - subnet: 10.10.10.0/24
 
