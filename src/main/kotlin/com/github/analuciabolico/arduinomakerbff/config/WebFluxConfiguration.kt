@@ -56,8 +56,7 @@ class WebFluxConfiguration : WebFluxConfigurer {
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/**")
             .allowedMethods("*")
-//            .allowedOrigins("*")
-            .allowedOrigins("http://localhost:3000")
+            .allowedOrigins("*")
             .allowCredentials(true)
             .maxAge(3600)
     }
