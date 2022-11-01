@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
-@Rest(value = ["/boards"])
+@Rest(value = ["/api/boards"])
 class BoardController(
     private val boardService: BoardService
 ) {

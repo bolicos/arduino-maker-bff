@@ -8,7 +8,7 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 
-@Rest(value = ["/blocks"])
+@Rest(value = ["/api/blocks"])
 class BlockController(
     private val blockService: BlockService
 ) {

@@ -11,9 +11,11 @@ import org.springframework.http.codec.ServerCodecConfigurer
 import org.springframework.http.codec.json.Jackson2JsonDecoder
 import org.springframework.http.codec.json.Jackson2JsonEncoder
 import org.springframework.web.reactive.config.CorsRegistry
+import org.springframework.web.reactive.config.EnableWebFlux
 import org.springframework.web.reactive.config.WebFluxConfigurer
 
 @Configuration
+@EnableWebFlux
 class WebFluxConfiguration : WebFluxConfigurer {
 
     companion object {
@@ -50,10 +52,13 @@ class WebFluxConfiguration : WebFluxConfigurer {
         configurer.defaultCodecs().jackson2JsonEncoder(encoder)
     }
 
+
     override fun addCorsMappings(registry: CorsRegistry) {
-        registry
-            .addMapping("/**")
+        registry.addMapping("/**")
             .allowedMethods("*")
-            .allowedOriginPatterns("https://*.herokuapp.com","https://*.netlify.app", "http://localhost:3000")
+//            .allowedOrigins("*")
+            .allowedOrigins("http://localhost:3000")
+            .allowCredentials(true)
+            .maxAge(3600)
     }
 }
