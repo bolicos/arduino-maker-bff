@@ -52,12 +52,31 @@ class WebFluxConfiguration : WebFluxConfigurer {
         configurer.defaultCodecs().jackson2JsonEncoder(encoder)
     }
 
+//    override fun addCorsMappings(registry: CorsRegistry) {
+//        registry
+//            .addMapping("/**")
+//            .allowedMethods("*");
+//    }
 
     override fun addCorsMappings(registry: CorsRegistry) {
-        registry.addMapping("/**")
+        registry
+            .addMapping("/**")
             .allowedMethods("*")
             .allowedOrigins("*")
-            .allowCredentials(true)
+            .allowedHeaders("*")
+            .allowCredentials(false)
             .maxAge(3600)
     }
+
+//    override fun addCorsMappings(registry: CorsRegistry) {
+//        registry
+//            .addMapping("/h2/**")
+//            .allowCredentials(false)
+//
+//        registry
+//            .addMapping("/api/v1/**")
+//            .allowCredentials(false)
+//            .allowedHeaders("*")
+//            .allowedOrigins("https://sgtcc-front.herokuapp.com", "http://localhost:3000")
+//    }
 }

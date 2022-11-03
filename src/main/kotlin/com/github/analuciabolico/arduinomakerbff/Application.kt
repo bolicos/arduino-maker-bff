@@ -7,7 +7,6 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 
 @SpringBootApplication
 @EnableReactiveMongoRepositories
-@ComponentScan(basePackages = ["com.github.analuciabolico.arduinomakerbff.config"])
 class Application
 
 fun main(args: Array<String>) {

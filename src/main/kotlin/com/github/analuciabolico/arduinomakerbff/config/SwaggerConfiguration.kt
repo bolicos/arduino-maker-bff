@@ -15,10 +15,8 @@ class SwaggerConfiguration {
     @Bean
     fun publicApi(): GroupedOpenApi {
         return GroupedOpenApi.builder()
-            .group("Arduino Maker API")
-//            .packagesToScan("com.github.analuciabolico.arduinomakerbff")
-//            .pathsToMatch("/v1/**")
-            .pathsToMatch("/**")
+            .group("v1")
+            .pathsToMatch("/api/v1/**")
             .build()
     }
 
@@ -31,6 +29,7 @@ class SwaggerConfiguration {
             .name("Ana Lucia Bolico")
             .url("https://github.com/analuciabolico")
             .email("analuciabolico.dev@gmail.com")
+
         val info = Info()
             .title("Arduino Maker")
             .description(description)

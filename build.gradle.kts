@@ -4,7 +4,7 @@ plugins {
 //    id 'idea'
     id("org.springframework.boot") version "2.7.5"
 //    id 'org.asciidoctor.convert' version '1.5.8'
-//    id 'org.springdoc.openapi-gradle-plugin' version '1.4.0'
+    id("org.springdoc.openapi-gradle-plugin") version "1.4.0"
     id("io.spring.dependency-management") version "1.0.15.RELEASE"
 
     kotlin("jvm") version "1.6.21"
@@ -31,7 +31,7 @@ repositories {
     mavenCentral()
 }
 
-val openApiVersion = "1.6.9"
+val openApiVersion = "1.6.12"
 val jakartaVersion = "6.0.0"
 
 dependencies {
@@ -70,7 +70,6 @@ dependencies {
 
 noArg {
     annotation("jakarta.persistence.Entity")
-    annotation("io.notbronken.sgtccapi.common.annotation.NoArgCompositeId")
 }
 
 tasks.withType<KotlinCompile> {

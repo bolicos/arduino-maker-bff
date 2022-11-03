@@ -1,26 +1,33 @@
 package com.github.analuciabolico.arduinomakerbff.controller
 
-import com.github.analuciabolico.arduinomakerbff.annotation.MappingJson
-import com.github.analuciabolico.arduinomakerbff.annotation.Rest
-import com.github.analuciabolico.arduinomakerbff.dto.BoardResponseDto
 import com.github.analuciabolico.arduinomakerbff.dto.BoardRequestDto
+import com.github.analuciabolico.arduinomakerbff.dto.BoardResponseDto
 import com.github.analuciabolico.arduinomakerbff.service.BoardService
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMethod
+import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
-@Rest(value = ["/api/boards"])
+@RestController
+@RequestMapping("/api/v1/boards")
 class BoardController(
     private val boardService: BoardService
 ) {
-    @MappingJson
+
+    @GetMapping(
+        produces = [MediaType.APPLICATION_JSON_VALUE]
+    )
+    @ResponseStatus(HttpStatus.OK)
     fun findAll(): Flux<BoardResponseDto> {
         return boardService.findAll()
     }
 
-    @MappingJson(method = [RequestMethod.POST], code = HttpStatus.CREATED)
+    @PostMapping(
+        consumes = [MediaType.APPLICATION_JSON_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE]
+    )
+    @ResponseStatus(HttpStatus.CREATED)
     fun save(@RequestBody dto: BoardRequestDto): Mono<String> {
         return boardService.save(dto)
     }
