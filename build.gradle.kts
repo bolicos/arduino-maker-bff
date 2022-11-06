@@ -1,9 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-//    id 'idea'
+    id("idea")
     id("org.springframework.boot") version "2.7.5"
-//    id 'org.asciidoctor.convert' version '1.5.8'
     id("org.springdoc.openapi-gradle-plugin") version "1.4.0"
     id("io.spring.dependency-management") version "1.0.15.RELEASE"
 
@@ -17,16 +16,6 @@ version = "1.0.0"
 java.sourceCompatibility = JavaVersion.VERSION_17
 java.targetCompatibility = JavaVersion.VERSION_17
 
-//configurations {
-//    developmentOnly
-//    runtimeClasspath {
-//        extendsFrom developmentOnly
-//    }
-//    compileOnly {
-//        extendsFrom annotationProcessor
-//    }
-//}
-
 repositories {
     mavenCentral()
 }
@@ -39,8 +28,7 @@ dependencies {
     /* Spring Boot */
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
-    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
-    implementation("org.springframework.boot:spring-boot-starter-jooq", )
+    implementation("org.springframework.boot:spring-boot-starter-jooq")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
 
@@ -60,8 +48,6 @@ dependencies {
 
     /* DataBases */
     runtimeOnly("com.h2database:h2")
-    runtimeOnly("io.r2dbc:r2dbc-h2")
-    implementation("org.liquibase:liquibase-core")
 
     /* Tests */
     testImplementation("io.projectreactor:reactor-test")

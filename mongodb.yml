@@ -20,7 +20,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - /home/analucia/docker/volumes/mongodb/database:/data/db
+      - ~/docker/volumes/mongodb/database:/data/db
     environment:
       MONGO_INITDB_DATABASE: "dev"
       MONGO_INITDB_ROOT_USERNAME: "admin"
@@ -37,9 +37,9 @@ services:
     ports:
       - 8081:8081
     environment:
-#      ME_CONFIG_MONGODB_ADMINUSERNAME: "admin"
-#      ME_CONFIG_MONGODB_ADMINPASSWORD: "arduino_maker_bff"
-#      ME_CONFIG_MONGODB_URL: "mongodb://admin:arduino_maker_bff@dev:27017"
+      #      ME_CONFIG_MONGODB_ADMINUSERNAME: "admin"
+      #      ME_CONFIG_MONGODB_ADMINPASSWORD: "arduino_maker_bff"
+      #      ME_CONFIG_MONGODB_URL: "mongodb://admin:arduino_maker_bff@dev:27017"
       ME_CONFIG_MONGODB_SERVER: "mongodb"
       ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
       ME_CONFIG_MONGODB_ADMINUSERNAME: "admin"
