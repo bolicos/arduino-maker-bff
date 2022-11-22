@@ -12,5 +12,5 @@ interface BlockService {
     fun saveAll(body: List<BlockRequestDto>): Flux<CreatedResource>
     fun findActuators(board: String?): Flux<BlockResponseDto>
     fun findSensors(board: String?): Flux<BlockResponseDto>
-    fun findFixed(board: String?): Mono<BlockResponseDto>
+    fun findFixed(board: String?): Flux<BlockResponseDto>
 }

@@ -49,7 +49,7 @@ class BlockController(
 
     @GetMapping("/fixed", produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.OK)
-    fun findFixed(@RequestParam board: String?): Mono<BlockResponseDto> {
+    fun findFixed(@RequestParam board: String?): Flux<BlockResponseDto> {
         return blockService.findFixed(board)
     }
 }

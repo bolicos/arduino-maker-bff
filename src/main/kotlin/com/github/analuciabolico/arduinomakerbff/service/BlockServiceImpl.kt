@@ -63,13 +63,13 @@ class BlockServiceImpl(
         }
     }
 
-    override fun findFixed(board: String?): Mono<BlockResponseDto> {
+    override fun findFixed(board: String?): Flux<BlockResponseDto> {
         val type = BlockTypesEnum.FIXED
 
         return when (board) {
-            null -> findByType(type).single()
-            "" -> findByType(type).single()
-            else -> findByType(type, board).singleOrEmpty()
+            null -> findByType(type)
+            "" -> findByType(type)
+            else -> findByType(type, board)
         }
     }
 
