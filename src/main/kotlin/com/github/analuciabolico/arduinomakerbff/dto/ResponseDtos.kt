@@ -3,6 +3,7 @@ package com.github.analuciabolico.arduinomakerbff.dto
 import com.github.analuciabolico.arduinomakerbff.entity.BlockTypesEnum
 
 data class BlockResponseDto(
+    val id: String? = null,
     val name: String? = null,
     val code: String? = null,
     val include: String? = null,

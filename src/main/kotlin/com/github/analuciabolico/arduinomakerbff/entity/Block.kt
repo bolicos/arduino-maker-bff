@@ -16,7 +16,10 @@ class Block(
     private val quantity: Int? = null,
 ) {
     fun toDto(): BlockResponseDto {
+        val id = if (this.name != null) this.name.uppercase() else ""
+
         return BlockResponseDto(
+            id = id,
             name = this.name,
             code = this.code,
             include = this.include,
