@@ -69,7 +69,7 @@ class BlockServiceImpl(
         return when (board) {
             null -> findByType(type).single()
             "" -> findByType(type).single()
-            else -> findByType(type, board).single()
+            else -> findByType(type, board).singleOrEmpty()
         }
     }
 
