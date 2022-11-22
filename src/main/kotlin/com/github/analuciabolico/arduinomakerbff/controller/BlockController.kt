@@ -31,8 +31,9 @@ class BlockController(
 
     @PostMapping("/all", consumes = [MediaType.APPLICATION_JSON_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
-    fun saveAll(@RequestBody body: List<BlockRequestDto>): Flux<CreatedResource> {
-        return blockService.saveAll(body)
+    fun saveAll(@RequestBody body: Iterable<BlockRequestDto>): Flux<CreatedResource> {
+        val dto = body.toList()
+        return blockService.saveAll(dto)
     }
 
     @GetMapping("/actuators", produces = [MediaType.APPLICATION_JSON_VALUE])

@@ -30,7 +30,8 @@ class BoardController(
 
     @PostMapping("/all", consumes = [MediaType.APPLICATION_JSON_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
-    fun saveAll(@RequestBody body: List<BoardRequestDto>): Flux<CreatedResource> {
-        return boardService.saveAll(body)
+    fun saveAll(@RequestBody body: Iterable<BoardRequestDto>): Flux<CreatedResource> {
+        val dto = body.toList()
+        return boardService.saveAll(dto)
     }
 }
