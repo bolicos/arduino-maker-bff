@@ -1,5 +1,6 @@
 package com.github.analuciabolico.arduinomakerbff.service
 
+import com.github.analuciabolico.arduinomakerbff.common.CreatedResource
 import com.github.analuciabolico.arduinomakerbff.dto.BoardRequestDto
 import com.github.analuciabolico.arduinomakerbff.dto.BoardResponseDto
 import com.github.analuciabolico.arduinomakerbff.entity.Board
@@ -17,14 +18,25 @@ class BoardServiceImpl(
         return boardRepository.findAll().map { board: Board -> board.toDto() }
     }
 
-    override fun save(boardRequestDto: BoardRequestDto): Mono<String> {
-        return boardRepository.save(boardRequestDto.toEntity())
+    override fun save(dto: BoardRequestDto): Mono<CreatedResource> {
+        return boardRepository.save(dto.toEntity())
             .doOnSuccess { element: Board ->
-                val dto = element.toDto()
-                val boardType = dto.type
+                val response = element.toDto()
+                val boardType = response.type
                 println("Save Board Success: $boardType")
             }
             .doOnError { throwable: Throwable -> println("Save Board Error: $throwable") }
-            .map { element: Board -> element.toDto().type }
+            .mapNotNull { element: Board -> CreatedResource(element.toDto().type) }
+    }
+
+    override fun saveAll(body: List<BoardRequestDto>): Flux<CreatedResource> {
+        return boardRepository.saveAll(body.map { it.toEntity() })
+            .doOnNext { element: Board ->
+                val response = element.toDto()
+                val boardType = response.type
+                println("Save Board Success: $boardType")
+            }
+            .doOnError { throwable: Throwable -> println("Save Board Error: $throwable") }
+            .mapNotNull { element: Board -> CreatedResource(element.toDto().type) }
     }
 }

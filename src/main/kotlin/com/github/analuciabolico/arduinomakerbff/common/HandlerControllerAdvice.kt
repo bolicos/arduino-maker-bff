@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
-import org.springframework.web.server.ResponseStatusException
 import java.util.logging.Logger
 
 @RestControllerAdvice
@@ -33,8 +32,15 @@ class HandlerControllerAdvice {
         return ResponseEntity(errorMessage, status)
     }
 
-    @ExceptionHandler(RuntimeException::class)
-    fun handleRuntimeException(exception: RuntimeException): ResponseEntity<ErrorMessageDto> {
+//    @ExceptionHandler(RuntimeException::class)
+//    fun handleRuntimeException(exception: RuntimeException): ResponseEntity<ErrorMessageDto> {
+//        factoryErrorCause(exception)
+//        val errorMessageDto = ErrorMessageDto(status.value(), exception.message)
+//        return ResponseEntity(errorMessageDto, status)
+//    }
+
+    @ExceptionHandler(IllegalStateException::class)
+    fun handleIllegalStateException(exception: IllegalStateException): ResponseEntity<ErrorMessageDto> {
         factoryErrorCause(exception)
         val errorMessageDto = ErrorMessageDto(status.value(), exception.message)
         return ResponseEntity(errorMessageDto, status)
@@ -66,14 +72,6 @@ class HandlerControllerAdvice {
 
     @ExceptionHandler(MissingKotlinParameterException::class)
     fun handleMissingKotlinParameterException(exception: MissingKotlinParameterException): ResponseEntity<ErrorMessageDto> {
-        factoryErrorCause(exception)
-        val status = HttpStatus.BAD_REQUEST
-        val errorMessageDto = ErrorMessageDto(status.value(), exception.message)
-        return ResponseEntity(errorMessageDto, status)
-    }
-
-    @ExceptionHandler(ResponseStatusException::class)
-    fun handleNotFoundException(exception: MissingKotlinParameterException): ResponseEntity<ErrorMessageDto> {
         factoryErrorCause(exception)
         val status = HttpStatus.BAD_REQUEST
         val errorMessageDto = ErrorMessageDto(status.value(), exception.message)

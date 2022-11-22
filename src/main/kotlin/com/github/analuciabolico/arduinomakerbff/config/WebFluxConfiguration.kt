@@ -19,14 +19,15 @@ import org.springframework.web.reactive.config.WebFluxConfigurer
 class WebFluxConfiguration : WebFluxConfigurer {
 
     companion object {
-        const val nullToEmptyCollection = false
-        const val nullToEmptyMap = false
+        const val nullToEmptyCollection = true
+        const val nullToEmptyMap = true
         const val nullIsSameAsDefault = true
         const val singletonSupport = false
         const val strictNullChecks = false
         const val writeDatesAsTimesTamp = false
         const val writeDateTimesTampAsNanoseconds = false
         const val failOnUnknownProperties = false
+        const val acceptEmptyArrayAsNullObject = true
     }
 
     override fun configureHttpMessageCodecs(configurer: ServerCodecConfigurer) {
@@ -44,6 +45,9 @@ class WebFluxConfiguration : WebFluxConfigurer {
             .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, writeDatesAsTimesTamp)
             .configure(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS, writeDateTimesTampAsNanoseconds)
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, failOnUnknownProperties)
+            .configure(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT, acceptEmptyArrayAsNullObject)
+            .configure(DeserializationFeature.FAIL_ON_TRAILING_TOKENS, false)
+            .configure(SerializationFeature.FAIL_ON_UNWRAPPED_TYPE_IDENTIFIERS, false)
 
         val decoder = Jackson2JsonDecoder(mapper)
         val encoder = Jackson2JsonEncoder(mapper)
@@ -51,12 +55,6 @@ class WebFluxConfiguration : WebFluxConfigurer {
         configurer.defaultCodecs().jackson2JsonDecoder(decoder)
         configurer.defaultCodecs().jackson2JsonEncoder(encoder)
     }
-
-//    override fun addCorsMappings(registry: CorsRegistry) {
-//        registry
-//            .addMapping("/**")
-//            .allowedMethods("*");
-//    }
 
     override fun addCorsMappings(registry: CorsRegistry) {
         registry
@@ -67,16 +65,4 @@ class WebFluxConfiguration : WebFluxConfigurer {
             .allowCredentials(false)
             .maxAge(3600)
     }
-
-//    override fun addCorsMappings(registry: CorsRegistry) {
-//        registry
-//            .addMapping("/h2/**")
-//            .allowCredentials(false)
-//
-//        registry
-//            .addMapping("/api/v1/**")
-//            .allowCredentials(false)
-//            .allowedHeaders("*")
-//            .allowedOrigins("https://sgtcc-front.herokuapp.com", "http://localhost:3000")
-//    }
 }
