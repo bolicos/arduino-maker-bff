@@ -18,6 +18,7 @@ class BlockServiceImpl(
     override fun findAll(): Flux<BlockResponseDto> {
         return blockRepository
             .findAll()
+            .doFinally { println("Find All Blocks") }
             .map { block: Block -> block.toDto() }
     }
 
@@ -28,7 +29,7 @@ class BlockServiceImpl(
                 val blockId = response.name
                 println("Save Block Success: [$blockId].")
             }
-            .doOnError { throwable: Throwable -> println("Save Block Error: [$throwable].") }
+            .doOnError { throwable: Throwable -> println("Save Block Error: [${throwable.message}].") }
             .mapNotNull { element: Block -> CreatedResource(element.toDto().name) }
     }
 
@@ -39,7 +40,7 @@ class BlockServiceImpl(
                 val blockId = response.name
                 println("Save Block Success: [$blockId].")
             }
-            .doOnError { throwable: Throwable -> println("Save Block Error: [$throwable].") }
+            .doOnError { throwable: Throwable -> println("Save Block Error: [${throwable.message}].") }
             .mapNotNull { element: Block -> CreatedResource(element.toDto().name) }
     }
 
@@ -71,6 +72,18 @@ class BlockServiceImpl(
             "" -> findByType(type)
             else -> findByType(type, board)
         }
+    }
+
+    override fun deleteById(id: String): Mono<Void> {
+        return blockRepository
+            .deleteById(id)
+            .doOnSuccess { println("Delete Block By $id") }
+    }
+
+    override fun deleteAll(): Mono<Void> {
+        return blockRepository
+            .deleteAll()
+            .doOnSuccess { println("Delete All Blocks") }
     }
 
     private fun findByType(type: BlockTypesEnum): Flux<BlockResponseDto> {

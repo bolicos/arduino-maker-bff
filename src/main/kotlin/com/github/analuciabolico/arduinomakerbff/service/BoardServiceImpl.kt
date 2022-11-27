@@ -15,7 +15,10 @@ class BoardServiceImpl(
 ) : BoardService {
 
     override fun findAll(): Flux<BoardResponseDto> {
-        return boardRepository.findAll().map { board: Board -> board.toDto() }
+        return boardRepository
+            .findAll()
+            .doFinally { println("Find All Boards") }
+            .map { board: Board -> board.toDto() }
     }
 
     override fun save(dto: BoardRequestDto): Mono<CreatedResource> {
@@ -25,7 +28,7 @@ class BoardServiceImpl(
                 val boardType = response.type
                 println("Save Board Success: $boardType")
             }
-            .doOnError { throwable: Throwable -> println("Save Board Error: $throwable") }
+            .doOnError { throwable: Throwable -> println("Save Board Error: ${throwable.message}") }
             .mapNotNull { element: Board -> CreatedResource(element.toDto().type) }
     }
 
@@ -36,7 +39,19 @@ class BoardServiceImpl(
                 val boardType = response.type
                 println("Save Board Success: $boardType")
             }
-            .doOnError { throwable: Throwable -> println("Save Board Error: $throwable") }
+            .doOnError { throwable: Throwable -> println("Save Board Error: ${throwable.message}") }
             .mapNotNull { element: Board -> CreatedResource(element.toDto().type) }
+    }
+
+    override fun deleteById(id: String): Mono<Void> {
+        return boardRepository
+            .deleteById(id)
+            .doOnSuccess { println("Delete Board By $id") }
+    }
+
+    override fun deleteAll(): Mono<Void> {
+        return boardRepository
+            .deleteAll()
+            .doOnSuccess { println("Delete All Boards") }
     }
 }

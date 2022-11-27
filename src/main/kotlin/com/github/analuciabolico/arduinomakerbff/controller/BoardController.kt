@@ -28,10 +28,22 @@ class BoardController(
         return boardService.save(dto)
     }
 
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    fun deleteAll(): Mono<Void> {
+        return boardService.deleteAll()
+    }
+
     @PostMapping("/all", consumes = [MediaType.APPLICATION_JSON_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
     fun saveAll(@RequestBody body: Iterable<BoardRequestDto>): Flux<CreatedResource> {
         val dto = body.toList()
         return boardService.saveAll(dto)
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    fun deleteById(@PathVariable id: String): Mono<Void> {
+        return boardService.deleteById(id)
     }
 }

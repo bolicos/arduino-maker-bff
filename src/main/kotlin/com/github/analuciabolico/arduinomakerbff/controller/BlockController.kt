@@ -23,6 +23,12 @@ class BlockController(
         return blockService.findAll()
     }
 
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    fun deleteAll(): Mono<Void> {
+        return blockService.deleteAll()
+    }
+
     @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
     fun save(@RequestBody dto: BlockRequestDto): Mono<CreatedResource> {
@@ -52,5 +58,11 @@ class BlockController(
     @ResponseStatus(HttpStatus.OK)
     fun findFixed(@RequestParam board: String?): Flux<BlockResponseDto> {
         return blockService.findFixed(board)
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    fun deleteById(@PathVariable id: String): Mono<Void> {
+        return blockService.deleteById(id)
     }
 }

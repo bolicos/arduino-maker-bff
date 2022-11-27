@@ -13,4 +13,6 @@ interface BlockService {
     fun findActuators(board: String?): Flux<BlockResponseDto>
     fun findSensors(board: String?): Flux<BlockResponseDto>
     fun findFixed(board: String?): Flux<BlockResponseDto>
+    fun deleteById(id: String): Mono<Void>
+    fun deleteAll(): Mono<Void>
 }

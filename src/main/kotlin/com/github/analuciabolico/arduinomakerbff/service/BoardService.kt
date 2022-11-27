@@ -10,4 +10,6 @@ interface BoardService {
     fun findAll(): Flux<BoardResponseDto>
     fun save(dto: BoardRequestDto): Mono<CreatedResource>
     fun saveAll(body: List<BoardRequestDto>): Flux<CreatedResource>
+    fun deleteById(id: String): Mono<Void>
+    fun deleteAll(): Mono<Void>
 }
