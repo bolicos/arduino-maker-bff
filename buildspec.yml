@@ -16,4 +16,4 @@ phases:
       - echo Build completed on `date`
 artifacts:
   files:
-    - build/libs/*-1.0.jar
+    - build/libs/arduino-maker-bff-1.0.0.jar
