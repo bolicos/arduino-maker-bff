@@ -11,9 +11,16 @@ phases:
     commands:
       - echo Build started on `date`
       - ./gradlew build
+      - containerName="defaultZinho"
+      - ImageURI=$(cat imageDetail.json | jq -r '.ImageURI')
+      - printf '[{"name":"CONTAINER_NAME","imageUri":"IMAGE_URI"}]' > imagedefinitions.json
+      - sed -i -e "s|CONTAINER_NAME|$containerName|g" imagedefinitions.json
+      - sed -i -e "s|IMAGE_URI|$ImageURI|g" imagedefinitions.json
+      - cat imagedefinitions.json
   post_build:
     commands:
       - echo Build completed on `date`
 artifacts:
   files:
+    - imagedefinitions.json
     - build/libs/arduino-maker-bff-1.0.0.jar
