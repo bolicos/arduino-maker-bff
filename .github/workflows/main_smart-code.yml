@@ -22,7 +22,9 @@ jobs:
           java-version: "11"
 
       - name: Build with Gradle
-        run: ../../gradlew build
+        run:
+          - chmod +x ../../gradlew
+          - ../../gradlew build
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
