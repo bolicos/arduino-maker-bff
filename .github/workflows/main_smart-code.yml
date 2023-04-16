@@ -24,6 +24,9 @@ jobs:
       # - name: Make file like executable
       # run: chmod +x ../../gradlew
 
+      - name: Ls
+        run: ls -la
+
       - name: Build with Gradle
         run: gradlew build
 
