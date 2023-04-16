@@ -11,10 +11,10 @@ on:
 env:
   DATABASE_URL: ${{ secrets.MONGODB_URL }}
   PROFILES_APP: ${{ vars.SPRING_PROFILES_ACTIVE }}
-  JAVA_VERSION: "11"
-  JAVA_JAR: "java-jar"
-  AZURE_WEBAPP_NAME: "smart-code"
-  AZURE_WEBAPP_DEPLOY: "Azure"
+  JAVA_VERSION: 11
+  JAVA_JAR: java-jar
+  AZURE_WEBAPP_NAME: smart-code
+  AZURE_WEBAPP_DEPLOY: Azure
 
 jobs:
   build:
