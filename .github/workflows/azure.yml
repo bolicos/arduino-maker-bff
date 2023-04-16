@@ -14,7 +14,6 @@ env:
   JAVA_VERSION: 11
   JAVA_JAR: java-jar
   AZURE_WEBAPP_NAME: smart-code
-  AZURE_WEBAPP_DEPLOY: Azure
 
 jobs:
   build:
@@ -41,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: ${{ env.AZURE_WEBAPP_DEPLOY }}
+      name: "Azure"
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -55,6 +54,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          slot-name: ${{ env.AZURE_WEBAPP_DEPLOY }}
           publish-profile: ${{ env.PROFILES_APP }}
           package: "*.jar"
