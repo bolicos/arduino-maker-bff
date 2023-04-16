@@ -9,11 +9,10 @@ on:
       - main
   workflow_dispatch:
 env:
-  DATABASE_URL: ${{ secrets.MONGODB_URL }}
-  PROFILES_APP: ${{ vars.SPRING_PROFILES_ACTIVE }}
   JAVA_VERSION: 11
   JAVA_JAR: java-jar
-  AZURE_WEBAPP_NAME: smart-code
+  AZURE_WEBAPP_PUBLISHPROFILE: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A79FE565119E498BBC38EF8B75CCEFCF }}
+  AZURE_WEBAPP_NAME: ${{ vars.NAME }}
 
 jobs:
   build:
@@ -54,5 +53,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ env.PROFILES_APP }}
+          publish-profile: ${{ env.AZURE_WEBAPP_PUBLISHPROFILE }}
           package: "*.jar"
