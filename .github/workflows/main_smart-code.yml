@@ -24,11 +24,8 @@ jobs:
       # - name: Make file like executable
       # run: chmod +x ../../gradlew
 
-      - name: Ls
-        run: ls -la
-
       - name: Build with Gradle
-        run: gradlew build
+        run: ./gradlew build
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
